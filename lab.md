@@ -2,10 +2,10 @@
 
 ---
 
-# [Lab pod assignment](./TECDEV-4500-Pod-Assignment.md)
+# [Lab pod assignment](./Pod-Assignment.md)
 # [Lab access](./lab-access.md)
 # [VI reference](./vi-reference.md)
-# [Lab guide](./TECDEV-4500-lab-guide.md)
+# [Lab guide](./lab-guide.md)
 # [Playbook files](./playbooks)
 
 ---
