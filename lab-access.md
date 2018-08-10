@@ -36,7 +36,7 @@ ping 172.16.101.93
 
 ### SSH into your Ansible server
 - SSH into your Ansible server using any SSH client
-	- IP address and credentials of your pod is at: https://github.com/gnaganab/Ansible_Lab/blob/master/lab-access.md
+	- IP address and credentials of your pod is at: https://github.com/gnaganab/Ansible_Lab/blob/master/pod-assignment.md
 	- Your pod number is written on a post-it sticker, pasted to your monitor.
 	- Make absolutely sure that you use the right IP addresses.
 

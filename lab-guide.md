@@ -1,14 +1,6 @@
-# **<p align="center">CISCO LIVE 2018</p>**
-# **<p align="center">ORLANDO, FL</p>**
 
 # **<p align="center">Network Automation with Ansible</p>**
-# **<p align="center">TECDEV-4500</p>**
-
----
 # **<p align="center">Lab Guide</p>**
-
----
-<p align="center">Gopal Naganaboyina | Yogi Raghunathan </p>
 
 ---
 
