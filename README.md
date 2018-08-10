@@ -1,2 +1,1 @@
-# TECDEV-4500
-CL2018 Orlando, FL
+# Ansible Lab
