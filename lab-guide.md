@@ -67,7 +67,6 @@ $ grep -v "#" /etc/ansible/ansible.cfg | grep -v ^$
 ```
 
 - In this section, you will edit/uncomment the following settings, under [default] section:
--
   - inventory  = /etc/ansible/hosts
   - deprecation_warning = False
   - gathering = explicit
@@ -75,23 +74,24 @@ $ grep -v "#" /etc/ansible/ansible.cfg | grep -v ^$
   - timeout = 10
   - retry_files_enabled = False
 
+
 - Edit the config file
   - Use your favorite editing method to edit the file
   - Use sudo if needed, sudo password is cisco
   - Ubuntu inbuilt editors: vi, vim
   - [VI reference](./vi-reference.md)
 
-	```
-	vi /etc/ansible/ansible.cfg
-	```
+```
+vi /etc/ansible/ansible.cfg
+```
 
-	  - The target config lines are already there in the file but are commented. Simply delete # at the beginning of the line.
+- The target config lines are already there in the file but are commented. Simply delete # at the beginning of the line.
 
 	- After editing, the config file will look like below.
 
-	### Sample output
+### Sample output
 
-	```
+```
 	cisco@ansible-controller:~$ grep -v "^#" /etc/ansible/ansible.cfg | grep -v ^$
 
 	[defaults]
@@ -109,28 +109,50 @@ $ grep -v "#" /etc/ansible/ansible.cfg | grep -v ^$
 	[selinux]
 	[colors]
 	[diff]
-	```
-	### Reference
-	> This is for later use. Skip for now. http://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings
-	> - Changes can be made and used in a configuration file which will be searched for in the following order:
-	>   - ANSIBLE_CONFIG (environment variable if set)
-	>   - ansible.cfg (in the current directory)
-	>   - ~/.ansible.cfg (in the home directory)
+
+```
+
+
+### Reference
+> This is for later use. Skip for now. http://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings
+> - Changes can be made and used in a configuration file which will be searched for in the following order:
+>   - ANSIBLE_CONFIG (environment variable if set)
+>   - ansible.cfg (in the current directory)
+>   - ~/.ansible.cfg (in the home directory)
 	>   - /etc/ansible/ansible.cfg
 	> - Ansible will process the above list and use the first file found, all others are ignored.
 
-	---
+---
 
 ## 1.2 Inventory file
-- Inventory file is preconfigured for you. We added your router IP addresses in two groups: IOS and XR.
-- Review the inventory file:
+- Edit your default inventory file: /etc/ansible/hosts
+- Create two device groups: IOS and XR
+- Assign the following variables to the devices: ansible_user=cisco ansible_ssh_pass=cisco
+- Find out your IOS and XR router mgmt IP addresses from the pod assignment sheet. Plug them in the file below.
+- Edit the hosts file
+  - Ubuntu inbuilt editors: vi, vim
+  - Use sudo if needed, sudo password is cisco
+
 
 ```
-$ grep inventory /etc/ansible/ansible.cfg | grep hosts
-$ cat /etc/ansible/hosts
-$ cat /etc/ansible/hosts | grep -v ^# | grep -v ^$
+vi /etc/ansible/hosts
 ```
-- Verification:
+
+### Example output
+```
+cisco@ansible-controller:~$ cat /etc/ansible/hosts | grep -v "#" | grep -v ^$
+
+[IOS]
+172.16.101.X ansible_user=cisco ansible_ssh_pass=cisco
+
+[XR]
+172.16.101.X ansible_user=cisco ansible_ssh_pass=cisco
+
+[ALL:children]
+IOS
+XR
+```
+- Run the following verification commands:
 
 ```
 $ ansible --list-hosts IOS
@@ -139,7 +161,6 @@ $ ansible --list-hosts ALL
 $ ansible --list-hosts all
 ```
 ### Example output
-- Reference purpose only. Feel free to skip it.
 
 ```
 cisco@ansible-controller:~$ grep inventory /etc/ansible/ansible.cfg | grep hosts
@@ -154,25 +175,11 @@ R2	ansible_host=172.16.101.XX ansible_user=cisco ansible_ssh_pass=cisco
 IOS
 XR
 :
-cisco@ansible-controller:~$ ansible --list-hosts IOS
-  hosts (1):
-    R1
-cisco@ansible-controller:~$ ansible --list-hosts XR
-  hosts (1):
-    R2
-cisco@ansible-controller:~$ ansible --list-hosts ALL
-  hosts (2):
-    R1
-    R2
-cisco@ansible-controller:~$ ansible --list-hosts all
-  hosts (2):
-    R1
-    R2
 ```
 ### Reference
 
-> - This is for future reference.  http://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
-> - In our case, /etc/ansible/hosts is the default inventory file. It is possible to have multiple inventory files.
+> - This snippet is for future reference.  http://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
+> - It is possible to have multiple inventory files.
 
 ---
 
